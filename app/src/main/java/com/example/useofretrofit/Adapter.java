@@ -2,7 +2,9 @@ package com.example.useofretrofit;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +28,8 @@ public class Adapter extends RecyclerView.Adapter<Holder> {
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = AdapterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new Holder(binding);//gorsel olusturma
+        //bindin add
+        return new Holder(binding);//tasarım inflate dışardaki projeyi içeri aktardık
     }
 
     @Override
@@ -35,6 +38,13 @@ public class Adapter extends RecyclerView.Adapter<Holder> {
         holder.getAdapterBinding().textView.setText(name);
         String lastName = example.getData().getLastName();
         holder.getAdapterBinding().textView2.setText(lastName);
+
+        holder.getAdapterBinding().imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "SLM", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Glide.with(context)
                 .load(example.getData().getAvatar())
